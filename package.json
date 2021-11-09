@@ -4,14 +4,16 @@
 	"description": "Devcamper backend API",
 	"main": "server.js",
 	"scripts": {
-		"start": "NODE_ENV=production node server",
+		"start": "SET NODE_ENV=production & node server",
 		"dev": "nodemon server"
 	},
 	"author": "Naranpurev Munkhbayar",
 	"license": "MIT",
 	"dependencies": {
 		"dotenv": "^10.0.0",
-		"express": "^4.17.1"
+		"express": "^4.17.1",
+		"mongoose": "^6.0.12",
+		"morgan": "^1.10.0"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.14"
