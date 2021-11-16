@@ -1,0 +1,62 @@
+const ErrorResponse = require('../utils/errorResponse');
+const asynchandler = require('../middleware/async');
+const User = require('../models/User');
+
+// @desc   Get users
+// @route  GET /api/v1/users
+// @access Private/admin
+
+exports.getUsers = asynchandler(async (req, res, next) => {
+	res.status(200).json(res.advancedResults);
+});
+
+// @desc   Get single user
+// @route  GET /api/v1/users/:id
+// @access Private/admin
+
+exports.getUser = asynchandler(async (req, res, next) => {
+	const user = await User.findById(req.params.id);
+	res.status(200).json({
+		success: true,
+		data: user,
+	});
+});
+
+// @desc   Create user
+// @route  POST /api/v1/users
+// @access Private/admin
+
+exports.createUser = asynchandler(async (req, res, next) => {
+	const user = await User.create(req.body);
+	res.status(201).json({
+		success: true,
+		data: user,
+	});
+});
+
+// @desc   Update user
+// @route  PUT /api/v1/users/:id
+// @access Private/admin
+
+exports.updateUser = asynchandler(async (req, res, next) => {
+	const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+		new: true,
+		runValidators: true,
+	});
+	res.status(200).json({
+		success: true,
+		data: user,
+	});
+});
+
+// @desc   Delete user
+// @route  PUT /api/v1/users/:id
+// @access Private/admin
+
+exports.deleteUser = asynchandler(async (req, res, next) => {
+	await User.findByIdAndDelete(req.params.id);
+	res.status(200).json({
+		success: true,
+		data: {},
+	});
+});
